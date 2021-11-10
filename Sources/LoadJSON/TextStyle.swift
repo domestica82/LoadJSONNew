@@ -10,11 +10,11 @@ import SwiftUI
 //For iOS14
 public struct TmpTextStyle: Identifiable{
     public var id: Int
-    var sentence: String
-    var isBold: Bool
+    public var sentence: String
+    public var isBold: Bool
 }
 //For iOS14
-func boldableText(contents: GeneralContentsModel) -> [TmpTextStyle]{
+public func boldableText(contents: GeneralContentsModel) -> [TmpTextStyle]{
     var result: [TmpTextStyle] = []
     let name = contents.name
     if name.contains("\n\n") {
@@ -41,7 +41,7 @@ func boldableText(contents: GeneralContentsModel) -> [TmpTextStyle]{
     return result
 }
 
-func insertString(content: GeneralContentsModel, text: String) -> GeneralContentsModel{
+public func insertString(content: GeneralContentsModel, text: String) -> GeneralContentsModel{
     var result = content
     result.name = text
     return result
@@ -52,9 +52,9 @@ func insertString(content: GeneralContentsModel, text: String) -> GeneralContent
 @available(iOS 13.0, *)
 public struct TextStyle: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
-    var contents: GeneralContentsModel
-    let section: Bool
-    let alert: Bool
+    public var contents: GeneralContentsModel
+    public let section: Bool
+    public let alert: Bool
     
     public var body: some View {
         let thisTag = contents.tag
@@ -123,7 +123,7 @@ public struct TextStyle: View {
 
 @available(macOS 12, *)
 @available(iOS 15, *)
-func AttributedText(contents: GeneralContentsModel, alert: Bool, textColor: Color) -> AttributedString {
+public func AttributedText(contents: GeneralContentsModel, alert: Bool, textColor: Color) -> AttributedString {
     var string =  try! AttributedString(markdown: contents.name)
     if contents.name.contains("\n\n") {
         let splitedList = contents.name.split(whereSeparator: {$0 == "\n"})

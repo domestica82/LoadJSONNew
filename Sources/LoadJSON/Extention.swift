@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+
 public extension Binding {
     static func mock(_ value: Value) -> Self {
         var value = value

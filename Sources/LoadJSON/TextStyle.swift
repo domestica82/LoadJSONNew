@@ -48,8 +48,6 @@ public func insertString(content: GeneralContentsModel, text: String) -> General
 }
 
 
-@available(macOS 12.0, *)
-@available(iOS 13.0, *)
 public struct TextStyle: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     public var contents: GeneralContentsModel
@@ -121,7 +119,6 @@ public struct TextStyle: View {
     }
 }
 
-@available(macOS 12, *)
 @available(iOS 15, *)
 public func AttributedText(contents: GeneralContentsModel, alert: Bool, textColor: Color) -> AttributedString {
     var string =  try! AttributedString(markdown: contents.name)

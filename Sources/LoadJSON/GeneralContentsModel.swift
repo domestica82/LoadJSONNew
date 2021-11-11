@@ -61,8 +61,6 @@ extension GeneralContentsModel: Comparable {
     }
 }
 
-@available(macOS 11.0, *)
-@available(iOS 14.0, *)
 public func changeTextStyle(type: GeneralContentsModel.TextStyle) -> Font.TextStyle {
     switch type {
     case .largeTitle:
@@ -90,8 +88,7 @@ public func changeTextStyle(type: GeneralContentsModel.TextStyle) -> Font.TextSt
     }
 }
 
-@available(macOS 11.0, *)
-@available(iOS 13.0, *)
+
 public func changeDesign(type: GeneralContentsModel.Design) -> Font.Design {
     switch type {
     case .serif:
@@ -105,8 +102,7 @@ public func changeDesign(type: GeneralContentsModel.Design) -> Font.Design {
     }
 }
 
-@available(macOS 11.0, *)
-@available(iOS 13.0, *)
+
 public func changePadding(edgeSet: [CGFloat]) -> [Edge.Set] {
     var changed: [Edge.Set] = [.all]
     if edgeSet.count == 2 {

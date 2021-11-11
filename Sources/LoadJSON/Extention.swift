@@ -8,8 +8,6 @@
 
 import SwiftUI
 
-@available(iOS 13.0, *)
-@available(macOS 12.0, *)
 public extension Binding {
     static func mock(_ value: Value) -> Self {
         var value = value
@@ -17,8 +15,6 @@ public extension Binding {
     }
 }
 
-@available(iOS 13.0, *)
-@available(macOS 12.0, *)
 public extension View {
     /// Applies the given transform if the given condition evaluates to `true`.
     /// - Parameters:
@@ -79,8 +75,6 @@ public extension UIApplication {
 }
 #endif
 
-@available(iOS 13.0, *)
-@available(macOS 11.0, *)
 public extension Text {
     func textBold(_ condition: @autoclosure () -> Bool) -> Text {
         if condition() {
@@ -99,8 +93,6 @@ public func insertAlert(content: AlertContentsModel, text: String) -> AlertConte
 
 
 //For StartView, HomeView, ProfileView, ProfileEditView, DataExchangeView, UpgradePlanView, ContentsListView,
-@available(iOS 13.0, *)
-@available(macOS 12.0, *)
 public struct AlertForiOS15: ViewModifier {
     @Binding var showingAlert: Bool
     let contents: AlertContentsModel
@@ -160,8 +152,6 @@ public struct AlertForiOS15: ViewModifier {
     }
 }
 
-@available(iOS 13.0, *)
-@available(macOS 11.0, *)
 public struct CustomPadding: ViewModifier {
     #if iOS
     @Environment(\.horizontalSizeClass) var hSC
@@ -200,8 +190,6 @@ public struct CustomPadding: ViewModifier {
     }
 }
 
-@available(iOS 13.0, *)
-@available(macOS 11.0, *)
 public struct Validation<Value>: ViewModifier {
     var value: Value
     var validator: (Value) -> Bool

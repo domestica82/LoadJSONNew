@@ -54,6 +54,13 @@ public struct TextStyle: View {
     public let section: Bool
     public let alert: Bool
     
+    public init(contents: GeneralContentsModel, section: Bool, alert: Bool) {
+        self.contents = contents
+        self.section = section
+        self.alert = alert
+    }
+
+    
     public var body: some View {
         let thisTag = contents.tag
         let horiAlignment: HorizontalAlignment = thisTag.contains("center") ? .center : thisTag.contains("trailing") ? .trailing : .leading

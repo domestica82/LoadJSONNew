@@ -57,7 +57,7 @@ public struct GeneralContentsModel: Identifiable, Codable, Hashable{
     public var scale: CGFloat?
     
     
-    internal init(id: Int, name: String, tag: String, fontStyle: TextSize, fontDesign: Design, markDown: Bool, isNeedBold: Bool, isNeedPadding: Bool, padding: Optional<[CGFloat]> = nil, scale: Optional<CGFloat> = nil){
+    public init(id: Int, name: String, tag: String, fontStyle: TextSize, fontDesign: Design, markDown: Bool, isNeedBold: Bool, isNeedPadding: Bool, padding: Optional<[CGFloat]> = nil, scale: Optional<CGFloat> = nil){
         self.id = id
         self.name = name
         self.tag = tag

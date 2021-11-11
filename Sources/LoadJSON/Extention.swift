@@ -60,7 +60,7 @@ public extension View {
     }
     
     func alertForiOS15(showingAlert: Binding<Bool>, contents: AlertContentsModel, action: Optional<(() -> Void)> = nil) -> some View {
-        self.modifier(AlertForiOS15(showingAlert: showingAlert, contents: contents, action: action))
+        self.modifier(AlertForiOS15(showingAlert, contents: contents, action: action))
     }
 }
 
@@ -87,6 +87,13 @@ public struct AlertForiOS15: ViewModifier {
     @Binding var showingAlert: Bool
     public let contents: AlertContentsModel
     public let action: (() -> Void)?
+    
+    init(_ showingAlert: Binding<Bool>, contents: AlertContentsModel, action: Optional<(() -> Void)> = nil) {
+        self._showingAlert = showingAlert
+        self.contents = contents
+        self.action = action
+    }
+
     
     public func body(content: Content) -> some View {
         if #available(iOS 15.0, *) {
@@ -150,6 +157,12 @@ public struct CustomPadding: ViewModifier {
     public var edgeSet: [Edge.Set]
     public var paddingSet: [CGFloat]
     public var scale: CGFloat
+    
+    public init(edgeSet: [Edge.Set], paddingSet: [CGFloat], scale: CGFloat){
+        self.edgeSet = edgeSet
+        self.paddingSet = paddingSet
+        self.scale = scale
+    }
 
     public func body(content: Content) -> some View {
     #if iOS

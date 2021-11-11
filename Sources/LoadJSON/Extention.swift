@@ -9,7 +9,7 @@
 import SwiftUI
 
 @available(macOS 12.0, *)
-extension Binding {
+public extension Binding {
     static func mock(_ value: Value) -> Self {
         var value = value
         return Binding(get: { value }, set: { value = $0 })
@@ -17,7 +17,7 @@ extension Binding {
 }
 
 @available(macOS 12.0, *)
-extension View {
+public extension View {
     /// Applies the given transform if the given condition evaluates to `true`.
     /// - Parameters:
     ///   - condition: The condition to evaluate.
@@ -70,7 +70,7 @@ extension View {
 //ex: .onTapGesture {UIApplication.shared.closeKeyboard()}
 
 #if iOS
-extension UIApplication {
+public extension UIApplication {
     func closeKeyboard() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
@@ -78,7 +78,7 @@ extension UIApplication {
 #endif
 
 @available(macOS 11.0, *)
-extension Text {
+public extension Text {
     func textBold(_ condition: @autoclosure () -> Bool) -> Text {
         if condition() {
             return self.bold()
@@ -88,7 +88,7 @@ extension Text {
     }
 }
 
-func insertAlert(content: AlertContentsModel, text: String) -> AlertContentsModel{
+public func insertAlert(content: AlertContentsModel, text: String) -> AlertContentsModel{
     var result = content
     result.message = text
     return result

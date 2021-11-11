@@ -10,17 +10,17 @@ import SwiftUI
 public struct GeneralContentsModel: Identifiable, Codable, Hashable{
     
     public let id: Int
-    var name: String
-    var tag: String
-    var fontStyle: TextStyle
-    var fontDesign: Design
-    var markDown: Bool
-    var isNeedBold: Bool
-    var isNeedPadding: Bool
-    var padding: [CGFloat]? = nil
-    var scale: CGFloat? = nil
+    public var name: String
+    public var tag: String
+    public var fontStyle: TextStyle
+    public var fontDesign: Design
+    public var markDown: Bool
+    public var isNeedBold: Bool
+    public var isNeedPadding: Bool
+    public var padding: [CGFloat]? = nil
+    public var scale: CGFloat? = nil
     
-    enum TextStyle: String, CaseIterable, Codable, Hashable {
+    public enum TextStyle: String, CaseIterable, Codable, Hashable {
         case largeTitle = "largeTitle"
         case title = "title"
         case title2 = "title2"
@@ -34,14 +34,14 @@ public struct GeneralContentsModel: Identifiable, Codable, Hashable{
         case callout = "callout"
     }
     
-    enum Design: String, CaseIterable, Codable, Hashable {
+    public enum Design: String, CaseIterable, Codable, Hashable {
         case serif = "serif"
         case `default` = "default"
         case monospaced = "monospaced"
         case rounded = "rounded"
     }
     
-    enum EdgeSet: String, CaseIterable, Codable, Hashable {
+    public enum EdgeSet: String, CaseIterable, Codable, Hashable {
         case top = "top"
         case horizontal = "horizontal"
         case bottom = "bottom"
@@ -63,7 +63,7 @@ extension GeneralContentsModel: Comparable {
 
 @available(macOS 11.0, *)
 @available(iOS 14.0, *)
-func changeTextStyle(type: GeneralContentsModel.TextStyle) -> Font.TextStyle {
+public func changeTextStyle(type: GeneralContentsModel.TextStyle) -> Font.TextStyle {
     switch type {
     case .largeTitle:
         return .largeTitle
@@ -92,7 +92,7 @@ func changeTextStyle(type: GeneralContentsModel.TextStyle) -> Font.TextStyle {
 
 @available(macOS 11.0, *)
 @available(iOS 13.0, *)
-func changeDesign(type: GeneralContentsModel.Design) -> Font.Design {
+public func changeDesign(type: GeneralContentsModel.Design) -> Font.Design {
     switch type {
     case .serif:
         return .serif
@@ -107,7 +107,7 @@ func changeDesign(type: GeneralContentsModel.Design) -> Font.Design {
 
 @available(macOS 11.0, *)
 @available(iOS 13.0, *)
-func changePadding(edgeSet: [CGFloat]) -> [Edge.Set] {
+public func changePadding(edgeSet: [CGFloat]) -> [Edge.Set] {
     var changed: [Edge.Set] = [.all]
     if edgeSet.count == 2 {
         changed = [.horizontal, .vertical]
@@ -122,9 +122,9 @@ func changePadding(edgeSet: [CGFloat]) -> [Edge.Set] {
 public struct AlertContentsModel: Identifiable, Codable, Hashable{
     
     public let id: Int
-    var title: String
-    var message: String
-    var buttonTitle1: String?
-    var buttonTitle2: String
+    public var title: String
+    public var message: String
+    public var buttonTitle1: String?
+    public var buttonTitle2: String
 
 }

@@ -7,12 +7,47 @@
 
 import SwiftUI
 
+
+
+public enum TextSize: String, CaseIterable, Codable, Hashable {
+    case largeTitle = "largeTitle"
+    case title = "title"
+    case title2 = "title2"
+    case title3 = "title3"
+    case headline = "headline"
+    case subheadline = "subheadline"
+    case footnote = "footnote"
+    case caption = "caption"
+    case caption2 = "caption2"
+    case body = "body"
+    case callout = "callout"
+}
+
+public enum Design: String, CaseIterable, Codable, Hashable {
+    case serif = "serif"
+    case `default` = "default"
+    case monospaced = "monospaced"
+    case rounded = "rounded"
+}
+
+public enum EdgeSet: String, CaseIterable, Codable, Hashable {
+    case top = "top"
+    case horizontal = "horizontal"
+    case bottom = "bottom"
+    case all = "all"
+    case vertical = "vertical"
+    case leading = "leading"
+    case trailing = "trailing"
+}
+
+
+
 public struct GeneralContentsModel: Identifiable, Codable, Hashable{
     
     public let id: Int
     public var name: String
     public var tag: String
-    public var fontStyle: TextStyle
+    public var fontStyle: TextSize
     public var fontDesign: Design
     public var markDown: Bool
     public var isNeedBold: Bool
@@ -20,36 +55,6 @@ public struct GeneralContentsModel: Identifiable, Codable, Hashable{
     public var padding: [CGFloat]? = nil
     public var scale: CGFloat? = nil
     
-    public enum TextStyle: String, CaseIterable, Codable, Hashable {
-        case largeTitle = "largeTitle"
-        case title = "title"
-        case title2 = "title2"
-        case title3 = "title3"
-        case headline = "headline"
-        case subheadline = "subheadline"
-        case footnote = "footnote"
-        case caption = "caption"
-        case caption2 = "caption2"
-        case body = "body"
-        case callout = "callout"
-    }
-    
-    public enum Design: String, CaseIterable, Codable, Hashable {
-        case serif = "serif"
-        case `default` = "default"
-        case monospaced = "monospaced"
-        case rounded = "rounded"
-    }
-    
-    public enum EdgeSet: String, CaseIterable, Codable, Hashable {
-        case top = "top"
-        case horizontal = "horizontal"
-        case bottom = "bottom"
-        case all = "all"
-        case vertical = "vertical"
-        case leading = "leading"
-        case trailing = "trailing"
-    }
 }
 
 extension GeneralContentsModel: Comparable {
@@ -61,7 +66,7 @@ extension GeneralContentsModel: Comparable {
     }
 }
 
-public func changeTextStyle(type: GeneralContentsModel.TextStyle) -> Font.TextStyle {
+public func changeTextStyle(type: TextSize) -> Font.TextStyle {
     switch type {
     case .largeTitle:
         return .largeTitle
@@ -89,7 +94,7 @@ public func changeTextStyle(type: GeneralContentsModel.TextStyle) -> Font.TextSt
 }
 
 
-public func changeDesign(type: GeneralContentsModel.Design) -> Font.Design {
+public func changeDesign(type: Design) -> Font.Design {
     switch type {
     case .serif:
         return .serif

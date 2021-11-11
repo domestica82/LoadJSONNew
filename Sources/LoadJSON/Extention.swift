@@ -63,17 +63,6 @@ public extension View {
     }
 }
 
-//Close keyboard when you tap other place.
-//How to use: View that include TextField just add .onTapGesture
-//ex: .onTapGesture {UIApplication.shared.closeKeyboard()}
-
-#if iOS
-public extension UIApplication {
-    func closeKeyboard() {
-        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
-#endif
 
 public extension Text {
     func textBold(_ condition: @autoclosure () -> Bool) -> Text {

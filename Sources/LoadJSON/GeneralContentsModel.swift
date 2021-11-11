@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 public extension GeneralContentsModel{
     enum TextSize: String, CaseIterable, Codable, Hashable {
         case largeTitle = "largeTitle"

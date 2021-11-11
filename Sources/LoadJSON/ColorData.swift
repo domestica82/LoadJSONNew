@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 13.0, *)
 @available(macOS 11.0, *)
 public struct ColorData {
     public static let blueStart = Color(red: 1 / 255, green: 54 / 255, blue: 97 / 255)

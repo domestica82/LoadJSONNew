@@ -8,36 +8,37 @@
 import SwiftUI
 
 
+public extension GeneralContentsModel{
+    enum TextSize: String, CaseIterable, Codable, Hashable {
+        case largeTitle = "largeTitle"
+        case title = "title"
+        case title2 = "title2"
+        case title3 = "title3"
+        case headline = "headline"
+        case subheadline = "subheadline"
+        case footnote = "footnote"
+        case caption = "caption"
+        case caption2 = "caption2"
+        case body = "body"
+        case callout = "callout"
+    }
 
-public enum TextSize: String, CaseIterable, Codable, Hashable {
-    case largeTitle = "largeTitle"
-    case title = "title"
-    case title2 = "title2"
-    case title3 = "title3"
-    case headline = "headline"
-    case subheadline = "subheadline"
-    case footnote = "footnote"
-    case caption = "caption"
-    case caption2 = "caption2"
-    case body = "body"
-    case callout = "callout"
-}
+    enum Design: String, CaseIterable, Codable, Hashable {
+        case serif = "serif"
+        case `default` = "default"
+        case monospaced = "monospaced"
+        case rounded = "rounded"
+    }
 
-public enum Design: String, CaseIterable, Codable, Hashable {
-    case serif = "serif"
-    case `default` = "default"
-    case monospaced = "monospaced"
-    case rounded = "rounded"
-}
-
-public enum EdgeSet: String, CaseIterable, Codable, Hashable {
-    case top = "top"
-    case horizontal = "horizontal"
-    case bottom = "bottom"
-    case all = "all"
-    case vertical = "vertical"
-    case leading = "leading"
-    case trailing = "trailing"
+    enum EdgeSet: String, CaseIterable, Codable, Hashable {
+        case top = "top"
+        case horizontal = "horizontal"
+        case bottom = "bottom"
+        case all = "all"
+        case vertical = "vertical"
+        case leading = "leading"
+        case trailing = "trailing"
+    }
 }
 
 
@@ -52,8 +53,22 @@ public struct GeneralContentsModel: Identifiable, Codable, Hashable{
     public var markDown: Bool
     public var isNeedBold: Bool
     public var isNeedPadding: Bool
-    public var padding: [CGFloat]? = nil
-    public var scale: CGFloat? = nil
+    public var padding: [CGFloat]?
+    public var scale: CGFloat?
+    
+    
+    public init(id: Int, name: String, tag: String, fontStyle: TextSize, fontDesign: Design, markDown: Bool, isNeedBold: Bool, isNeedPadding: Bool, padding: Optional<[CGFloat]> = nil, scale: Optional<CGFloat> = nil){
+        self.id = id
+        self.name = name
+        self.tag = tag
+        self.fontStyle = fontStyle
+        self.fontDesign = fontDesign
+        self.markDown = markDown
+        self.isNeedBold = isNeedBold
+        self.isNeedPadding = isNeedPadding
+        self.padding = padding
+        self.scale = scale
+    }
     
 }
 
@@ -66,7 +81,7 @@ extension GeneralContentsModel: Comparable {
     }
 }
 
-public func changeTextStyle(type: TextSize) -> Font.TextStyle {
+public func changeTextStyle(type: GeneralContentsModel.TextSize) -> Font.TextStyle {
     switch type {
     case .largeTitle:
         return .largeTitle
@@ -94,7 +109,7 @@ public func changeTextStyle(type: TextSize) -> Font.TextStyle {
 }
 
 
-public func changeDesign(type: Design) -> Font.Design {
+public func changeDesign(type: GeneralContentsModel.Design) -> Font.Design {
     switch type {
     case .serif:
         return .serif
@@ -127,5 +142,14 @@ public struct AlertContentsModel: Identifiable, Codable, Hashable{
     public var message: String
     public var buttonTitle1: String?
     public var buttonTitle2: String
+    
+    public init(id: Int, title: String, message: String, buttonTitle1: Optional<String> = nil, buttonTitle2: String){
+        self.id = id
+        self.title = title
+        self.message = message
+        self.buttonTitle1 = buttonTitle1
+        self.buttonTitle2 = buttonTitle2
+    }
+ 
 
 }

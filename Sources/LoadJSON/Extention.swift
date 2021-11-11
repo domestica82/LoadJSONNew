@@ -97,7 +97,7 @@ public struct AlertForiOS15: ViewModifier {
     @Binding var showingAlert: Bool
     let contents: AlertContentsModel
     let action: (() -> Void)?
-
+    
     public func body(content: Content) -> some View {
         if #available(iOS 15.0, *) {
             content

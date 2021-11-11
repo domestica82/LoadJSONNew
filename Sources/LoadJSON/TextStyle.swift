@@ -12,6 +12,12 @@ public struct TmpTextStyle: Identifiable{
     public var id: Int
     public var sentence: String
     public var isBold: Bool
+    
+    public init(id: Int, sentence: String, isBold: Bool){
+        self.id = id
+        self.sentence = sentence
+        self.isBold = isBold
+    }
 }
 //For iOS14
 public func boldableText(contents: GeneralContentsModel) -> [TmpTextStyle]{

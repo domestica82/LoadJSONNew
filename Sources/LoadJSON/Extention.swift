@@ -84,8 +84,8 @@ public func insertAlert(content: AlertContentsModel, text: String) -> AlertConte
 //For StartView, HomeView, ProfileView, ProfileEditView, DataExchangeView, UpgradePlanView, ContentsListView,
 public struct AlertForiOS15: ViewModifier {
     @Binding var showingAlert: Bool
-    let contents: AlertContentsModel
-    let action: (() -> Void)?
+    public let contents: AlertContentsModel
+    public let action: (() -> Void)?
     
     public func body(content: Content) -> some View {
         if #available(iOS 15.0, *) {
@@ -146,9 +146,9 @@ public struct CustomPadding: ViewModifier {
     @Environment(\.horizontalSizeClass) var hSC
     @Environment(\.verticalSizeClass) var vSC
     #endif
-    var edgeSet: [Edge.Set]
-    var paddingSet: [CGFloat]
-    var scale: CGFloat
+    public var edgeSet: [Edge.Set]
+    public var paddingSet: [CGFloat]
+    public var scale: CGFloat
 
     public func body(content: Content) -> some View {
     #if iOS
@@ -180,8 +180,8 @@ public struct CustomPadding: ViewModifier {
 }
 
 public struct Validation<Value>: ViewModifier {
-    var value: Value
-    var validator: (Value) -> Bool
+    public var value: Value
+    public var validator: (Value) -> Bool
 
     public func body(content: Content) -> some View {
         // Here we use Group to perform type erasure, to give our

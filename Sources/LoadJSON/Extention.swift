@@ -9,64 +9,64 @@
 import SwiftUI
 
 
-public extension Binding {
-    static func mock(_ value: Value) -> Self {
+extension Binding {
+    static public func mock(_ value: Value) -> Self {
         var value = value
         return Binding(get: { value }, set: { value = $0 })
     }
 }
 
-public extension View {
+extension View {
     /// Applies the given transform if the given condition evaluates to `true`.
     /// - Parameters:
     ///   - condition: The condition to evaluate.
     ///   - transform: The transform to apply to the source `View`.
     /// - Returns: Either the original `View` or the modified `View` if the condition is `true`.
-    @ViewBuilder func `if`<Content: View>(_ condition: @autoclosure () -> Bool, transform: (Self) -> Content) -> some View {
+    @ViewBuilder public func `if`<Content: View>(_ condition: @autoclosure () -> Bool, transform: (Self) -> Content) -> some View {
         if condition() {
             transform(self)
         } else {
             self
         }
     }
-    @ViewBuilder func sizeClassPadding(_ condition: @autoclosure () -> Bool, edge: Edge.Set, size: CGFloat) -> some View {
+    @ViewBuilder public func sizeClassPadding(_ condition: @autoclosure () -> Bool, edge: Edge.Set, size: CGFloat) -> some View {
         if condition() {
             self.padding(edge, size)
         }else {
             self
         }
     }
-    @ViewBuilder func debugModifier<T: View>(_ modifier: (Self) -> T) -> some View {
+    @ViewBuilder public func debugModifier<T: View>(_ modifier: (Self) -> T) -> some View {
         #if DEBUG
         modifier(self)
         #else
         self
         #endif
     }
-    func debugBorder(_ color: Color = .red, width: CGFloat = 1) -> some View {
+    public func debugBorder(_ color: Color = .red, width: CGFloat = 1) -> some View {
         debugModifier {
             $0.border(color, width: width)
         }
     }
 
-    func debugBackground(_ color: Color = .red) -> some View {
+    public func debugBackground(_ color: Color = .red) -> some View {
         debugModifier {
             $0.background(color)
         }
     }
     
-    func customPadding(edgeSet: [Edge.Set] = [.all], paddingSet: [CGFloat] = [10], scale: CGFloat = 1) -> some View {
+    public func customPadding(edgeSet: [Edge.Set] = [.all], paddingSet: [CGFloat] = [10], scale: CGFloat = 1) -> some View {
         self.modifier(CustomPadding(edgeSet: edgeSet, paddingSet: paddingSet, scale: scale))
     }
     
-    func alertForiOS15(showingAlert: Binding<Bool>, contents: AlertContentsModel, action: Optional<(() -> Void)> = nil) -> some View {
+    public func alertForiOS15(showingAlert: Binding<Bool>, contents: AlertContentsModel, action: Optional<(() -> Void)> = nil) -> some View {
         self.modifier(AlertForiOS15(showingAlert, contents: contents, action: action))
     }
 }
 
 
-public extension Text {
-    func textBold(_ condition: @autoclosure () -> Bool) -> Text {
+extension Text {
+    public func textBold(_ condition: @autoclosure () -> Bool) -> Text {
         if condition() {
             return self.bold()
         }else {

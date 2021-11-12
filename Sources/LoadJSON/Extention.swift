@@ -16,7 +16,7 @@ public extension Binding {
     }
 }
 
-public extension View {
+extension View {
     /// Applies the given transform if the given condition evaluates to `true`.
     /// - Parameters:
     ///   - condition: The condition to evaluate.
@@ -55,7 +55,7 @@ public extension View {
         }
     }
     
-    func customPadding(edgeSet: [Edge.Set] = [.all], paddingSet: [CGFloat] = [10], scale: CGFloat = 1) -> some View {
+    public func customPadding(edgeSet: [Edge.Set] = [.all], paddingSet: [CGFloat] = [10], scale: CGFloat = 1) -> some View {
         self.modifier(CustomPadding(edgeSet: edgeSet, paddingSet: paddingSet, scale: scale))
     }
     

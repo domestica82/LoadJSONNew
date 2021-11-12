@@ -43,23 +43,6 @@ extension View {
         self
         #endif
     }
-//    @ViewBuilder public func NewPaddings(hSC: , edgeSet: [Edge.Set], paddingSet: [CGFloat], scale: CGFloat) -> some View {
-//        if edgeSet.count == 1 {
-//            self.padding(edgeSet[0], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[0] * scale) : CGFloat(paddingSet[0]))
-//        }else if edgeSet.count == 2 {
-//            self.padding(edgeSet[0], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[0] * scale) : CGFloat(paddingSet[0]))
-//                .padding(edgeSet[1], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[1] * scale) : CGFloat(paddingSet[1]))
-//        }else if edgeSet.count == 3 {
-//            self.padding(edgeSet[0], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[0] * scale) : CGFloat(paddingSet[0]))
-//                .padding(edgeSet[1], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[1] * scale) : CGFloat(paddingSet[1]))
-//                .padding(edgeSet[2], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[2] * scale) : CGFloat(paddingSet[2]))
-//        }else if edgeSet.count == 4 {
-//            self.padding(edgeSet[0], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[0] * scale) : CGFloat(paddingSet[0]))
-//                .padding(edgeSet[1], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[1] * scale) : CGFloat(paddingSet[1]))
-//                .padding(edgeSet[2], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[2] * scale) : CGFloat(paddingSet[2]))
-//                .padding(edgeSet[3], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[3]     * scale) : CGFloat(paddingSet[3]))
-//        }
-//    }
     public func debugBorder(_ color: Color = .red, width: CGFloat = 1) -> some View {
         debugModifier {
             $0.border(color, width: width)
@@ -72,11 +55,10 @@ extension View {
         }
     }
     
-    #if iOS
-    public func customPadding(hSC: Optional<UserInterfaceSizeClass> = UserInterfaceSizeClass(.regular), vSC: Optional<UserInterfaceSizeClass> = UserInterfaceSizeClass(.regular), edgeSet: [Edge.Set] = [.all], paddingSet: [CGFloat] = [10], scale: CGFloat = 1) -> some View {
-        self.modifier(CustomPadding(hSC: hSC, vSC: vSC, edgeSet: edgeSet, paddingSet: paddingSet, scale: scale))
+
+    public func customPadding(edgeSet: [Edge.Set] = [.all], paddingSet: [CGFloat] = [10], scale: CGFloat = 1) -> some View {
+        self.modifier(CustomPadding(edgeSet: edgeSet, paddingSet: paddingSet, scale: scale))
     }
-    #endif
     public func alertForiOS15(showingAlert: Binding<Bool> = .constant(false), contents: AlertContentsModel = AlertContentsModel(id: 1, title: "Test", message: "Hello!", buttonTitle1: nil, buttonTitle2: "Test"), action: Optional<(() -> Void)> = nil) -> some View {
         self.modifier(AlertForiOS15(showingAlert: showingAlert, contents: contents, action: action))
     }
@@ -161,46 +143,17 @@ struct AlertForiOS15: ViewModifier {
     }
 }
 
-extension CustomPadding{
-    #if iOS
-    enum DeviceTraitStatus {
-        case wRhR
-        case wChR
-        case wRhC
-        case wChC
-
-        init(hSizeClass: UserInterfaceSizeClass?, vSizeClass: UserInterfaceSizeClass?) {
-
-            switch (hSizeClass, vSizeClass) {
-            case (.regular, .regular):
-                self = .wRhR
-            case (.compact, .regular):
-                self = .wChR
-            case (.regular, .compact):
-                self = .wRhC
-            case (.compact, .compact):
-                self = .wChC
-            default:
-                self = .wChR
-            }
-        }
-    }
-    #endif
-}
-
-
 struct CustomPadding: ViewModifier {
-    #if iOS
-    let hSC: UserInterfaceSizeClass?
-    let vSC: UserInterfaceSizeClass?
-    #endif
+    @Environment(\.horizontalSizeClass) var hSC
+    @Environment(\.verticalSizeClass) var vSC
+    let deviceTraitStatus = DeviceTraitStatus(hSizeClass: hSC, vSizeClass: vSC)
+//    let hSC: UserInterfaceSizeClass?
+//    let vSC: UserInterfaceSizeClass?
     var edgeSet: [Edge.Set]
     var paddingSet: [CGFloat]
     var scale: CGFloat
     
     func body(content: Content) -> some View {
-    #if iOS
-        let deviceTraitStatus = DeviceTraitStatus(hSizeClass: hSC, vSizeClass: vSC)
         if edgeSet.count == 1 {
             content
                 .padding(edgeSet[0], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[0] * scale) : CGFloat(paddingSet[0]))
@@ -220,10 +173,6 @@ struct CustomPadding: ViewModifier {
                 .padding(edgeSet[2], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[2] * scale) : CGFloat(paddingSet[2]))
                 .padding(edgeSet[3], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[3]     * scale) : CGFloat(paddingSet[3]))
         }
-        #elseif macOS
-        content
-            .padding(edgeSet[0], CGFloat(paddingSet[0]) * scale)
-        #endif
     }
         
 }

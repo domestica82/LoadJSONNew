@@ -149,16 +149,16 @@ public struct AlertForiOS15: ViewModifier {
     }
 }
 
-public struct CustomPadding: ViewModifier {
+struct CustomPadding: ViewModifier {
     #if iOS
-    @Environment(\.horizontalSizeClass) public var hSC
-    @Environment(\.verticalSizeClass) public var vSC
+    @Environment(\.horizontalSizeClass) var hSC
+    @Environment(\.verticalSizeClass) var vSC
     #endif
-    public var edgeSet: [Edge.Set]
-    public var paddingSet: [CGFloat]
+    var edgeSet: [Edge.Set]
+    var paddingSet: [CGFloat]
     public var scale: CGFloat
     
-    public func body(content: Content) -> some View {
+    func body(content: Content) -> some View {
     #if iOS
         let deviceTraitStatus = DeviceTraitStatus(hSizeClass: hSC, vSizeClass: vSC)
         if edgeSet.count == 1 {

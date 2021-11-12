@@ -146,7 +146,6 @@ struct AlertForiOS15: ViewModifier {
 struct CustomPadding: ViewModifier {
     @Environment(\.horizontalSizeClass) var hSC
     @Environment(\.verticalSizeClass) var vSC
-    let deviceTraitStatus = DeviceTraitStatus(hSizeClass: hSC, vSizeClass: vSC)
 //    let hSC: UserInterfaceSizeClass?
 //    let vSC: UserInterfaceSizeClass?
     var edgeSet: [Edge.Set]
@@ -154,6 +153,7 @@ struct CustomPadding: ViewModifier {
     var scale: CGFloat
     
     func body(content: Content) -> some View {
+        let deviceTraitStatus = DeviceTraitStatus(hSizeClass: hSC, vSizeClass: vSC)
         if edgeSet.count == 1 {
             content
                 .padding(edgeSet[0], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[0] * scale) : CGFloat(paddingSet[0]))

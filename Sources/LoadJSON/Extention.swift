@@ -160,7 +160,7 @@ struct AlertForiOS15: ViewModifier {
     }
 }
 
-extension ViewModifier{
+extension CustomPadding{
     #if iOS
     enum DeviceTraitStatus {
         case wRhR

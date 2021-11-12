@@ -43,6 +43,23 @@ extension View {
         self
         #endif
     }
+//    @ViewBuilder public func NewPaddings(hSC: , edgeSet: [Edge.Set], paddingSet: [CGFloat], scale: CGFloat) -> some View {
+//        if edgeSet.count == 1 {
+//            self.padding(edgeSet[0], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[0] * scale) : CGFloat(paddingSet[0]))
+//        }else if edgeSet.count == 2 {
+//            self.padding(edgeSet[0], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[0] * scale) : CGFloat(paddingSet[0]))
+//                .padding(edgeSet[1], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[1] * scale) : CGFloat(paddingSet[1]))
+//        }else if edgeSet.count == 3 {
+//            self.padding(edgeSet[0], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[0] * scale) : CGFloat(paddingSet[0]))
+//                .padding(edgeSet[1], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[1] * scale) : CGFloat(paddingSet[1]))
+//                .padding(edgeSet[2], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[2] * scale) : CGFloat(paddingSet[2]))
+//        }else if edgeSet.count == 4 {
+//            self.padding(edgeSet[0], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[0] * scale) : CGFloat(paddingSet[0]))
+//                .padding(edgeSet[1], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[1] * scale) : CGFloat(paddingSet[1]))
+//                .padding(edgeSet[2], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[2] * scale) : CGFloat(paddingSet[2]))
+//                .padding(edgeSet[3], deviceTraitStatus == .wRhR ? CGFloat(paddingSet[3]     * scale) : CGFloat(paddingSet[3]))
+//        }
+//    }
     public func debugBorder(_ color: Color = .red, width: CGFloat = 1) -> some View {
         debugModifier {
             $0.border(color, width: width)
@@ -59,8 +76,8 @@ extension View {
         self.modifier(CustomPadding(edgeSet: edgeSet, paddingSet: paddingSet, scale: scale))
     }
     
-    public func alertForiOS15(showingAlert: Binding<Bool>, contents: AlertContentsModel, action: Optional<(() -> Void)> = nil) -> some View {
-        self.modifier(AlertForiOS15(showingAlert, contents: contents, action: action))
+    public func alertForiOS15(showingAlert: Binding<Bool> = .constant(false), contents: AlertContentsModel = AlertContentsModel(id: 1, title: "Test", message: "Hello!", buttonTitle1: nil, buttonTitle2: "Test"), action: Optional<(() -> Void)> = nil) -> some View {
+        self.modifier(AlertForiOS15(showingAlert: showingAlert, contents: contents, action: action))
     }
 }
 
@@ -83,19 +100,13 @@ public func insertAlert(content: AlertContentsModel, text: String) -> AlertConte
 
 
 //For StartView, HomeView, ProfileView, ProfileEditView, DataExchangeView, UpgradePlanView, ContentsListView,
-public struct AlertForiOS15: ViewModifier {
+struct AlertForiOS15: ViewModifier {
     @Binding var showingAlert: Bool
-    public let contents: AlertContentsModel
-    public let action: (() -> Void)?
+    let contents: AlertContentsModel
+    let action: (() -> Void)?
     
-    init(_ showingAlert: Binding<Bool>, contents: AlertContentsModel, action: Optional<(() -> Void)> = nil) {
-        self._showingAlert = showingAlert
-        self.contents = contents
-        self.action = action
-    }
-
     
-    public func body(content: Content) -> some View {
+    func body(content: Content) -> some View {
         if #available(iOS 15.0, *) {
             content
                  .confirmationDialog(

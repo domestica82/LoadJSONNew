@@ -110,10 +110,14 @@ public struct TextStyle: View {
                 }else {
                     if thisTag.contains("subscription-link") {
                         Link("サブスクリプション設定画面へ", destination: URL(string: "https://support.apple.com/ja-jp/HT202039")!)
-                            .customPadding(edgeSet: [.top, .horizontal, .bottom], paddingSet: [0, 10, 20], scale: 2)
+                        #if iOS
+                            .customPadding(hSC: .regular, vSC: .regular, edgeSet: [.top, .horizontal, .bottom], paddingSet: [0, 10, 20], scale: 2)
+                        #endif
                     }else if thisTag.contains("google-link") {
                         Link("Googleのプライバシーポリシー", destination: URL(string: "https://policies.google.com/privacy?hl=ja")!)
-                            .customPadding(edgeSet: [.top, .horizontal, .bottom], paddingSet: [0, 10, 10], scale: 2)
+                        #if iOS
+                            .customPadding(hSC: .regular, vSC: .regular, edgeSet: [.top, .horizontal, .bottom], paddingSet: [0, 10, 10], scale: 2)
+                        #endif
                     }else {
                         ForEach(boldableText(contents: contents)){content in
                             Text(content.sentence)
@@ -125,9 +129,11 @@ public struct TextStyle: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .init(horizontal: horiAlignment, vertical: .center))
+#if iOS
             .if(contents.isNeedPadding){ view in
-                view.customPadding(edgeSet: edgeSet, paddingSet: contents.padding!, scale: contents.scale!)
+                view.customPadding(hSC: .regular, vSC: .regular, edgeSet: edgeSet, paddingSet: contents.padding!, scale: contents.scale!)
             }
+#endif
         }
     }
 }

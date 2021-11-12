@@ -72,10 +72,11 @@ extension View {
         }
     }
     
-    public func customPadding(edgeSet: [Edge.Set] = [.all], paddingSet: [CGFloat] = [10], scale: CGFloat = 1) -> some View {
-        self.modifier(CustomPadding(edgeSet: edgeSet, paddingSet: paddingSet, scale: scale))
+    #if iOS
+    public func customPadding(hSC: Optional<UserInterfaceSizeClass> = UserInterfaceSizeClass(.regular), vSC: Optional<UserInterfaceSizeClass> = UserInterfaceSizeClass(.regular), edgeSet: [Edge.Set] = [.all], paddingSet: [CGFloat] = [10], scale: CGFloat = 1) -> some View {
+        self.modifier(CustomPadding(hSC: hSC, vSC: vSC, edgeSet: edgeSet, paddingSet: paddingSet, scale: scale))
     }
-    
+    #endif
     public func alertForiOS15(showingAlert: Binding<Bool> = .constant(false), contents: AlertContentsModel = AlertContentsModel(id: 1, title: "Test", message: "Hello!", buttonTitle1: nil, buttonTitle2: "Test"), action: Optional<(() -> Void)> = nil) -> some View {
         self.modifier(AlertForiOS15(showingAlert: showingAlert, contents: contents, action: action))
     }
@@ -190,8 +191,8 @@ extension CustomPadding{
 
 struct CustomPadding: ViewModifier {
     #if iOS
-    @Environment(\.horizontalSizeClass) var hSC
-    @Environment(\.verticalSizeClass) var vSC
+    let hSC: UserInterfaceSizeClass?
+    let vSC: UserInterfaceSizeClass?
     #endif
     var edgeSet: [Edge.Set]
     var paddingSet: [CGFloat]

@@ -110,14 +110,10 @@ public struct TextStyle: View {
                 }else {
                     if thisTag.contains("subscription-link") {
                         Link("サブスクリプション設定画面へ", destination: URL(string: "https://support.apple.com/ja-jp/HT202039")!)
-                        #if iOS
-                            .customPadding(hSC: .regular, vSC: .regular, edgeSet: [.top, .horizontal, .bottom], paddingSet: [0, 10, 20], scale: 2)
-                        #endif
+                            .customPadding(edgeSet: [.top, .horizontal, .bottom], paddingSet: [0, 10, 20], scale: 2)
                     }else if thisTag.contains("google-link") {
                         Link("Googleのプライバシーポリシー", destination: URL(string: "https://policies.google.com/privacy?hl=ja")!)
-                        #if iOS
-                            .customPadding(hSC: .regular, vSC: .regular, edgeSet: [.top, .horizontal, .bottom], paddingSet: [0, 10, 10], scale: 2)
-                        #endif
+                            .customPadding(edgeSet: [.top, .horizontal, .bottom], paddingSet: [0, 10, 10], scale: 2)
                     }else {
                         ForEach(boldableText(contents: contents)){content in
                             Text(content.sentence)

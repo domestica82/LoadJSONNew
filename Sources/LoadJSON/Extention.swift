@@ -194,7 +194,8 @@ public struct Validation<Value>: ViewModifier {
 }
 
 struct Extention_LibraryContent: LibraryContentProvider {
-    var views: [LibraryItem] {
-        LibraryItem(/*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/)
+    @LibraryContentBuilder
+    func modifiers(base: Text) -> [LibraryItem] {
+      LibraryItem(base.customPadding(edgeSet: [.all], paddingSet: [10], scale: 1), category: .layout)
     }
 }

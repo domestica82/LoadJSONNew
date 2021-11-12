@@ -152,3 +152,11 @@ public struct AlertContentsModel: Identifiable, Codable, Hashable{
  
 
 }
+
+
+
+struct GeneralContentsModel_LibraryContent: LibraryContentProvider {
+    var views: [LibraryItem] {
+        LibraryItem(GeneralContentsModel(id: 1, name: "Example", tag: "test", fontStyle: .title2, fontDesign: .default, markDown: false, isNeedBold: false, isNeedPadding: true, padding: [20, 40, 30], scale: 2))
+    }
+}

@@ -55,7 +55,7 @@ public extension View {
         }
     }
     
-    func customPadding(edgeSet: [Edge.Set], paddingSet: [CGFloat], scale: CGFloat) -> some View {
+    func customPadding(edgeSet: [Edge.Set] = [.all], paddingSet: [CGFloat] = [10], scale: CGFloat = 1) -> some View {
         self.modifier(CustomPadding(edgeSet: edgeSet, paddingSet: paddingSet, scale: scale))
     }
     
@@ -149,22 +149,16 @@ public struct AlertForiOS15: ViewModifier {
     }
 }
 
-public struct CustomPadding: ViewModifier {
+struct CustomPadding: ViewModifier {
     #if iOS
     @Environment(\.horizontalSizeClass) var hSC
     @Environment(\.verticalSizeClass) var vSC
     #endif
-    public var edgeSet: [Edge.Set]
-    public var paddingSet: [CGFloat]
-    public var scale: CGFloat
+    var edgeSet: [Edge.Set]
+    var paddingSet: [CGFloat]
+    var scale: CGFloat
     
-    public init(edgeSet: [Edge.Set], paddingSet: [CGFloat], scale: CGFloat){
-        self.edgeSet = edgeSet
-        self.paddingSet = paddingSet
-        self.scale = scale
-    }
-
-    public func body(content: Content) -> some View {
+    func body(content: Content) -> some View {
     #if iOS
         let deviceTraitStatus = DeviceTraitStatus(hSizeClass: hSC, vSizeClass: vSC)
         if edgeSet.count == 1 {
@@ -208,5 +202,11 @@ public struct Validation<Value>: ViewModifier {
                 content
             }
         }
+    }
+}
+
+struct Extention_LibraryContent: LibraryContentProvider {
+    var views: [LibraryItem] {
+        LibraryItem(/*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/)
     }
 }

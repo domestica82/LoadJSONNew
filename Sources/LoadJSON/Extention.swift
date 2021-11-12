@@ -160,6 +160,33 @@ struct AlertForiOS15: ViewModifier {
     }
 }
 
+extension ViewModifier{
+    #if iOS
+    enum DeviceTraitStatus {
+        case wRhR
+        case wChR
+        case wRhC
+        case wChC
+
+        init(hSizeClass: UserInterfaceSizeClass?, vSizeClass: UserInterfaceSizeClass?) {
+
+            switch (hSizeClass, vSizeClass) {
+            case (.regular, .regular):
+                self = .wRhR
+            case (.compact, .regular):
+                self = .wChR
+            case (.regular, .compact):
+                self = .wRhC
+            case (.compact, .compact):
+                self = .wChC
+            default:
+                self = .wChR
+            }
+        }
+    }
+    #endif
+}
+
 
 struct CustomPadding: ViewModifier {
     #if iOS
@@ -197,6 +224,7 @@ struct CustomPadding: ViewModifier {
             .padding(edgeSet[0], CGFloat(paddingSet[0]) * scale)
         #endif
     }
+        
 }
 
 public struct Validation<Value>: ViewModifier {

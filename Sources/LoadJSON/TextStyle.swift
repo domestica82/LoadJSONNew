@@ -75,7 +75,7 @@ public struct TextStyle: View {
         let cardTitle: Color = colorScheme == .light ? Color.black : Color.white
         let colorMode: Color = thisTag.contains("date") ? Color.secondary : thisTag.contains("supportCard") ? supportCard : thisTag.contains("contact-link") || thisTag.contains("master") ? Color.yellow :
         thisTag.contains("gameContent") ? ColorData.bluegreyStart : thisTag.contains("cardTitle") ? cardTitle :  isLightMode
-//        let edgeSet = contents.isNeedPadding ? changePadding(edgeSet: contents.padding!) : []
+        let edgeSet = contents.isNeedPadding ? changePadding(edgeSet: contents.padding!) : []
         VStack(alignment: .leading){
             if section {
                 Group{

@@ -167,7 +167,7 @@ struct CustomPadding: ViewModifier {
     #endif
     var edgeSet: [Edge.Set]
     var paddingSet: [CGFloat]
-    public var scale: CGFloat
+    var scale: CGFloat
     
     func body(content: Content) -> some View {
     #if iOS

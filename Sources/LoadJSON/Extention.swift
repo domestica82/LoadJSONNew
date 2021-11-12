@@ -151,8 +151,8 @@ public struct AlertForiOS15: ViewModifier {
 
 public struct CustomPadding: ViewModifier {
     #if iOS
-    @Environment(\.horizontalSizeClass) var hSC
-    @Environment(\.verticalSizeClass) var vSC
+    @Environment(\.horizontalSizeClass) public var hSC
+    @Environment(\.verticalSizeClass) public var vSC
     #endif
     public var edgeSet: [Edge.Set]
     public var paddingSet: [CGFloat]

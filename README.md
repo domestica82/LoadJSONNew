@@ -1,3 +1,3 @@
 # LoadJSON
 
-LoadJSON include GeneralContentsModel, SparkError, Extention, TextStyle.
+LoadJSON Swift Package includes ColorData, Extention, GeneralContentsModel, LoadJSON, SizeClassEnum, TextStyle.

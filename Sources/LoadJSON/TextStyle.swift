@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-//For iOS14
+
+@available(iOS, deprecated: 14.0)
 public struct TmpTextStyle: Identifiable{
     public var id: Int
     public var sentence: String
@@ -19,7 +20,8 @@ public struct TmpTextStyle: Identifiable{
         self.isBold = isBold
     }
 }
-//For iOS14
+
+@available(iOS, deprecated: 14.0)
 public func boldableText(contents: GeneralContentsModel) -> [TmpTextStyle]{
     var result: [TmpTextStyle] = []
     let name = contents.name
